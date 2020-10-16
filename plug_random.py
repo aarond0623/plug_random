@@ -1,6 +1,7 @@
 import asyncio
 from kasa import SmartPlug
 from random import randint
+import time
 
 # Initial delay in seconds.
 DELAY = 10 * 60
@@ -11,27 +12,24 @@ RUN_MAX = 30
 WAIT_MIN = 30
 WAIT_MAX = 5 * 60
 
-async def toggle(plug):
-    if plug.is_on:
-        await plug.turn_off()
-    else:
-        await plug.turn_on()
-
-if __name__ == '__main__':
+async def main():
     plug_ip = input("Enter plug IP address: ")
     plug = SmartPlug(plug_ip)
     try:
-        asyncio.run(plug.update())
-    except SmartDeviceError:
+        await plug.update()
+    except:
         print ("Cannot communicate with plug.")
         exit()
-
+    
     await plug.turn_off()
-    await asyncio.sleep(DELAY)
+    time.sleep(DELAY)
     while True:
         run_time = randint(RUN_MIN, RUN_MAX)
         wait_time = randint(WAIT_MIN, WAIT_MAX)
-        toggle(plug)
-        await asyncio.sleep(run_time)
-        toggle(plug)
-        await asyncio.sleep(wait_time)
+        await plug.turn_on()
+        time.sleep(run_time)
+        await plug.turn_off()
+        time.sleep(wait_time)
+
+if __name__ == '__main__':
+    asyncio.run(main())
