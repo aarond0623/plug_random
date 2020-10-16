@@ -17,7 +17,7 @@ def countdown(t):
     secs = t - (mins * 60)
     for m in range(mins, -1, -1):
         for s in range(secs, -1, -1):
-            print("  {:02d}:{:02d}".format(m, s), end="\r")
+            print("  {}:{:02d}".format(m, s), end="\r")
             sleep(1)
         secs = 59
 
@@ -34,6 +34,7 @@ async def main():
     await plug.turn_off()
     print("Beginning countdown.")
     countdown(DELAY)
+    print("Running")
     while True:
         run_time = randint(RUN_MIN, RUN_MAX)
         wait_time = randint(WAIT_MIN, WAIT_MAX)
