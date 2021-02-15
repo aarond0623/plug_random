@@ -4,13 +4,13 @@ from random import randint
 from time import sleep
 
 # Initial delay in seconds.
-DELAY = 5 * 60
+DELAY = 180
 # Run time min and max in seconds.
 RUN_MIN = 3
 RUN_MAX = 30
 # Wait time min and max in seconds.
-WAIT_MIN = 30
-WAIT_MAX = 3 * 60
+WAIT_MIN = 3
+WAIT_MAX = 30
 
 def countdown(t):
     mins = t // 60
